@@ -1,6 +1,6 @@
 {
   "entry": "src/index.js",
-  "publicPath":"./",
+  "publicPath":"https://anglay.github.io/reactdva/dist/",
   "env": {
     "development": {
       "extraBabelPlugins": [
