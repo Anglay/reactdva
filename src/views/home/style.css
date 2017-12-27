@@ -1,0 +1,32 @@
+.main-container {
+  position: fixed;
+  left: 0;
+  right: 0;
+  top: 0;
+  bottom: 0;
+  background: #f0f2f5;
+}
+.main-container .sider-content .logo {
+  height: 32px;
+  background: rgba(255, 255, 255, 0.2);
+  margin: 16px;
+}
+.main-container .ant-layout-sider-collapsed .ant-menu-submenu-selected .ant-menu-submenu-title {
+  background: #000c17;
+}
+.main-container .layout-container .trigger {
+  font-size: 18px;
+  line-height: 64px;
+  padding: 0 24px;
+  cursor: pointer;
+  transition: color .3s;
+}
+.main-container .layout-container .trigger:hover {
+  color: #1890ff;
+}
+.main-container .layout-container .content-container {
+  margin: 24px 16px;
+  padding: 24px;
+  background: #fff;
+  min-height: 280px;
+}
