@@ -2,6 +2,7 @@ import React from 'react';
 import {connect} from 'dva';
 import {Redirect, Route, Switch } from 'dva/router';
 import {Layout, Icon} from 'antd';
+import request from "../../utils/request";
 //左侧菜单
 import SiderMenu from './menu';
 import RouterConfig from './routerconfig';
@@ -27,80 +28,14 @@ class Main extends React.Component {
     }
     
     componentDidMount(){
-        this.setState({
-            menuList:[{
-                "menuCode": "home",
-                "menuName": "主页",
-            },{
-                "menuCode": "outstock",
-                "menuName": "出库",
-                "children":[{
-                    "parentCode": "outstock",
-                    "menuCode": "sales_out",
-                    "menuName": "销售出库"
-                },{
-                    "parentCode": "outstock",
-                    "menuCode": "ret_purchase_out",
-                    "menuName": "采购退货出库"
-                },{
-                    "parentCode": "outstock",
-                    "menuCode": "allot_outstock",
-                    "menuName": "调拨出库"
-                },{
-                    "parentCode": "outstock",
-                    "menuCode": "add_outstock",
-                    "menuName": "新增出库"
-                }]
-            },{
-                "menuCode": "storage",
-                "menuName": "库存",
-                "children":[{
-                    "parentCode": "storage",
-                    "menuCode": "inventory",
-                    "menuName": "盘点"
-                },{
-                    "parentCode": "storage",
-                    "menuCode": "adjust",
-                    "menuName": "库存调整"
-                }]
-            },{
-                "menuCode": "instock",
-                "menuName": "入库",
-                "children":[{
-                    "parentCode": "instock",
-                    "menuCode": "purchase_in",
-                    "menuName": "采购入库"
-                },{
-                    "parentCode": "instock",
-                    "menuCode": "ret_sales_in",
-                    "menuName": "销售退货入库"
-                },{
-                    "parentCode": "instock",
-                    "menuCode": "allot_instock",
-                    "menuName": "调拨入库"
-                },{
-                    "parentCode": "instock",
-                    "menuCode": "add_instock",
-                    "menuName": "新增入库"
-                }]
-            },{
-                "menuCode": "report",
-                "menuName": "报表",
-                "children":[{
-                    "parentCode": "report",
-                    "menuCode": "purchase_report",
-                    "menuName": "采购入库报表"
-                },{
-                    "parentCode": "report",
-                    "menuCode": "ret_sales_report",
-                    "menuName": "销售退货入库报表"
-                },{
-                    "parentCode": "report",
-                    "menuCode": "sales_out_report",
-                    "menuName": "销售出库报表"
-                }]
-            }]
-        });
+        request("/api/common/menu").then((response)=>{
+            var data = response.data
+            if(data.success){
+                this.setState({
+                    menuList:data.list
+                });
+            }
+        })
     }
 
     componentWillReceiveProps(nextProps) {

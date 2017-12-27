@@ -15,26 +15,6 @@ class SiderMenu extends React.Component {
             rootSubmenuKeys:[]
         }
     }
-
-    componentDidMount(){
-        //调用render()
-        this.forceUpdate(()=>{
-            let Keys = this.props.menuList.map(function(item){
-                return item.menuCode
-            })
-            this.setState({
-                rootSubmenuKeys:Keys
-            })
-            var pathnameArr = this.props.location.pathname.split("/");
-            if(pathnameArr.length>2){
-                this.setState({openKeys:[pathnameArr[1]]});
-                this.setState({current: pathnameArr[2]});
-            }else if(pathnameArr.length<=2){
-                this.setState({openKeys:[]});
-                this.setState({current: pathnameArr[1]});
-            }
-        })
-    }
     
     onOpenChange(openKeys) {
         const latestOpenKey = openKeys.find(key => this.state.openKeys.indexOf(key) === -1);
@@ -53,7 +33,24 @@ class SiderMenu extends React.Component {
         }
         this.setState({current: selected.key});
     }
-    
+    componentWillReceiveProps(nextProps) {
+        this.forceUpdate(()=>{
+            let Keys = this.props.menuList.map(function(item){
+                return item.menuCode
+            })
+            this.setState({
+                rootSubmenuKeys:Keys
+            })
+            var pathnameArr = this.props.location.pathname.split("/");
+            if(pathnameArr.length>2){
+                this.setState({openKeys:[pathnameArr[1]]});
+                this.setState({current: pathnameArr[2]});
+            }else if(pathnameArr.length<=2){
+                this.setState({openKeys:[]});
+                this.setState({current: pathnameArr[1]});
+            }
+        })
+    }
     render() {
         return (
             <Sider
